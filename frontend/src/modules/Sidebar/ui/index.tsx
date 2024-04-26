@@ -91,8 +91,9 @@ const routes: Route[] = [
 ];
 const Sidebar = memo(() => {
   return (
-    <div className="w-[4vw] overflow-hidden group h-[100vh] transition-all duration-200 hover:w-[18vw] px-2 z-20 flex  items-start justify-center py-3 bg-white fixed top-0 left-0 backdrop-blur-2xl">
+    <div className="overflow-hidden group h-[100vh] transition-all duration-200 w-[15vw] px-2 z-20 flex  items-start justify-center py-3 bg-white fixed top-0 left-0 backdrop-blur-2xl">
       <nav className="flex flex-col gap-2 w-full">
+        <h2 className="w-full font-bold text-xl my-2">TULA-HACK</h2>
         {routes.map((el) => (
           <NavLink
             key={el.link}
@@ -104,7 +105,7 @@ const Sidebar = memo(() => {
             }
           >
             {el.icon}
-            <span className="group-hover:scale-x-100 duration-100 group-hover:ml-4 transition-all whitespace-nowrap group-hover:w-full group-hover:h-full scale-x-0 w-0 h-0">
+            <span className=" duration-100 ml-4 transition-all whitespace-nowrap h-full">
               {el.name}
             </span>
           </NavLink>

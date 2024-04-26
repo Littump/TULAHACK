@@ -1,13 +1,32 @@
-import LoginHeader from "@/modules/Login/ui/LoginHeader.tsx";
-import LoginForm from "@/modules/Login/ui/LoginForm.tsx";
+import {useState} from "react";
+import TCoordinates from "@/modules/Map/types/mapTypes.ts";
+import {YMap, YMapDefaultFeaturesLayer, YMapDefaultMarker, YMapDefaultSchemeLayer} from "ymap3-components";
 
-const Login = () => {
+
+const Map = () => {
+  const [zoom, setZoom] = useState<number>(13);
+  const [center, setCenter] = useState<TCoordinates>([51,52]);
+  const [placemarkCurrent, setPlacemarkCurrent] = useState<TCoordinates>(center);
   return (
-    <div className="flex gap-4 flex-col mt-10 w-4/12 mx-auto">
-      <LoginHeader />
-      <LoginForm />
+    <div className="w-full h-[500px] px-4">
+      <YMap
+          className="shadow-md rounded-xl cursor-pointer"
+
+          location={{
+            zoom: zoom,
+            center: center,
+          }}
+      >
+          <YMapDefaultMarker
+              title='точка запяточка'
+              color="#60a5fa"
+              coordinates={placemarkCurrent}
+          />
+        <YMapDefaultSchemeLayer />
+        <YMapDefaultFeaturesLayer />
+      </YMap>
     </div>
   );
 };
 
-export default Login;
+export default Map;

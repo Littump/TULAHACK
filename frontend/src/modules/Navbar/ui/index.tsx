@@ -11,7 +11,7 @@ const Navbar = ({title}:Props) => {
   };
 
   return (
-    <header className="w-[100vw] bg-gray-100 z-10 flex justify-between items-center py-3 pl-[6vw] pr-8 fixed top-0 left-0 ">
+    <header className="w-[100vw] bg-gray-100 z-10 flex justify-between items-center py-3 pl-[17vw] pr-8 fixed top-0 left-0 ">
       <h3 className="text-xl">{title && title}</h3>
       <div className="dropdown dropdown-end">
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">

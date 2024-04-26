@@ -17,11 +17,11 @@ function MainLayout({ children, title }: Props) {
 
   return (
     <div className="w-full flex flex-col min-h-[100vh] bg-gray-100 items-center ">
-      <Navbar title={title} />
       <Sidebar />
       <div
-        className={`pl-[6vw] w-full mx-auto flex flex-col items-center justify-center mt-24 mb-12`}
+        className={`pl-[17vw] w-full mx-auto flex flex-col items-center justify-center mt-24 mb-12`}
       >
+          <Navbar title={title} />
         <div className="w-full h-full rounded-xl bg-white p-6">{children}</div>
       </div>
     </div>

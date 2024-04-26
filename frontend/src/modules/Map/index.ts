@@ -1,3 +1,3 @@
-import Login from "@/modules/Login/ui";
+import Map from "./ui";
 
-export default Login;
+export default Map;
