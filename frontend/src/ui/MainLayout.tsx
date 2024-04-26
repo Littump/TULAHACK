@@ -5,7 +5,7 @@ import Navbar from "@/modules/Navbar";
 
 interface Props {
   children: JSX.Element | string;
-  title: string;
+  title?: string;
 }
 
 function MainLayout({ children, title }: Props) {

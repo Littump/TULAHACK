@@ -1,7 +1,7 @@
 import {NavLink} from "react-router-dom";
 import user from '@/assets/user.png'
 interface Props{
-  title:string;
+  title?:string;
 }
 
 const Navbar = ({title}:Props) => {
@@ -12,7 +12,7 @@ const Navbar = ({title}:Props) => {
 
   return (
     <header className="w-[100vw] bg-gray-100 z-10 flex justify-between items-center py-3 pl-[6vw] pr-8 fixed top-0 left-0 ">
-      <h3 className="text-xl">{title}</h3>
+      <h3 className="text-xl">{title && title}</h3>
       <div className="dropdown dropdown-end">
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
           <div className="w-10 rounded-full">
