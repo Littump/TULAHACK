@@ -1,7 +1,7 @@
 import NewsFeed from "@/modules/News/ui/NewsFeed.tsx";
 import AddNews from "@/modules/News/ui/addNews.tsx";
 import { useGetNews } from "@/modules/News/api/useGetNews.ts";
-import img_url from "@/config/img_url.ts";
+// import img_url from "@/config/img_url.ts";
 import { useState } from "react";
 import { useGetPriorityNews } from "@/modules/News/api/useGetPriorityNews.ts";
 
