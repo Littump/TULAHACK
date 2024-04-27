@@ -19,10 +19,32 @@ class UserCustomSerializer(UserSerializer):
         )
 
 
+class CommentSerializer(serializers.ModelSerializer):
+    user = SerializerMethodField()
+    user_image = SerializerMethodField()
+
+    class Meta:
+        model = models.Comment
+        fields = '__all__'
+        ordering = ['created']
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['user'] = user
+        return models.Comment.objects.create(**validated_data)
+
+    def get_user(self, obj):
+        return obj.user.name
+
+    def get_user_image(self, obj):
+        return obj.user.photo
+
+
 class PostSerializer(serializers.ModelSerializer):
     user = SerializerMethodField()
     likes = SerializerMethodField()
     clients = Clients()
+    comments = SerializerMethodField()
 
     class Meta:
         model = models.Post
@@ -44,6 +66,10 @@ class PostSerializer(serializers.ModelSerializer):
     def get_likes(self, obj):
         return obj.likes.count()
 
+    def get_comments(self, obj):
+        comments = obj.comments.all()
+        return CommentSerializer(comments, many=True).data
+
 
 class LikeUserPostSerializer(serializers.ModelSerializer):
     class Meta:
@@ -54,24 +80,3 @@ class LikeUserPostSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         validated_data['user'] = user
         return models.LikeUserPost.objects.create(**validated_data)
-
-
-class CommentSerializer(serializers.ModelSerializer):
-    user = SerializerMethodField()
-    user_image = SerializerMethodField()
-
-    class Meta:
-        model = models.Comment
-        fields = '__all__'
-        ordering = ['created']
-
-    def create(self, validated_data):
-        user = self.context['request'].user
-        validated_data['user'] = user
-        return models.Comment.objects.create(**validated_data)
-
-    def get_user(self, obj):
-        return obj.user.name
-
-    def get_user_image(self, obj):
-        return obj.user.photo
