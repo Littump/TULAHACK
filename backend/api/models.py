@@ -43,5 +43,12 @@ class Comment(models.Model):
 
 
 class Chat(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chats_user')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chats_user', blank=True)
     company = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chats_company')
+
+
+class Message(models.Model):
+    chat = models.ForeignKey(Chat, on_delete=models.CASCADE, related_name='messages')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='messages', blank=True)
+    text = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)

@@ -1,6 +1,6 @@
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import action
-from rest_framework.viewsets import ViewSet, ModelViewSet
+from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
@@ -37,6 +37,11 @@ class CustomUserViewSet(UserViewSet):
     filterset_class = filters.UserFilter
 
 
-class ChatViewSet(ViewSet):
+class ChatViewSet(ModelViewSet):
     queryset = models.Chat.objects.all()
     serializer_class = serializers.ChatSerializer
+
+
+class MessageViewSet(ModelViewSet):
+    queryset = models.Message.objects.all()
+    serializer_class = serializers.MessageSerializer
