@@ -41,9 +41,9 @@ body {
     @apply font-medium;
   }
   body{
-    @apply bg-gray-100
+    @apply bg-gray-50
   }
   .my-btn{
-    @apply btn rounded-full text-white bg-violet-500 hover:bg-violet-600
+    @apply btn rounded-full text-white bg-primary hover:bg-violet-600
   }
 }

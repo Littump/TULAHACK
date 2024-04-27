@@ -1,13 +1,13 @@
-import LoginHeader from "@/modules/Login/ui/LoginHeader.tsx";
-import LoginForm from "@/modules/Login/ui/LoginForm.tsx";
+import RegistrationHeader from "@/modules/Registration/ui/RegistrationHeader.tsx";
+import RegistrationForm from "@/modules/Registration/ui/RegistrationForm.tsx";
 
-const Login = () => {
+const Registration = () => {
   return (
-    <div className="flex gap-4 flex-col mt-10 w-4/12 mx-auto">
-      <LoginHeader />
-      <LoginForm />
+    <div className="flex gap-4 flex-col mt-4 w-4/12 mx-auto">
+      <RegistrationHeader />
+      <RegistrationForm />
     </div>
   );
 };
 
-export default Login;
+export default Registration;

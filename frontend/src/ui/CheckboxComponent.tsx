@@ -9,7 +9,7 @@ type Props = {
 
 function CheckboxComponent({ children, className, name, onClick }: Props) {
   return (
-    <div className={` ${className} flex`}>
+    <div className={` ${className} flex gap-2`}>
       <Field
         onClick={onClick}
         name={name}

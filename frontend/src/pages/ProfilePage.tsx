@@ -1,18 +1,7 @@
-import Login from "@/modules/Login";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import Navbar from "@/modules/Navbar";
+import Profile from "@/modules/Profile";
 
-function LoginPage() {
-  const token = localStorage.getItem("token");
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (token) navigate("/");
-  }, [navigate, token]);
-  return <div>
-    <Navbar title="Вход"/>
-    <Login />
-  </div>;
+function ProfilePage() {
+  return <Profile />;
 }
 
-export default LoginPage;
+export default ProfilePage;

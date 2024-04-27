@@ -1,3 +1,4 @@
-import Login from "@/modules/Login/ui";
+import Chat from "./ui/Chat.tsx";
+import ChatGroups from "./ui/ChatGroups.tsx";
 
-export default Login;
+export { Chat, ChatGroups };

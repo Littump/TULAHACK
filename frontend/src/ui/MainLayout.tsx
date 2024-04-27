@@ -1,29 +1,28 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { ReactNode } from "react";
 import Sidebar from "@/modules/Sidebar";
 import Navbar from "@/modules/Navbar";
+import Bot from "@/modules/bot";
 
 interface Props {
-  children: JSX.Element | string;
+  children: ReactNode;
   title?: string;
 }
 
 function MainLayout({ children, title }: Props) {
   const token = localStorage.getItem("token");
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!token) navigate("/login");
-  }, [navigate, token]);
 
   return (
-    <div className="w-full flex flex-col min-h-[100vh] bg-gray-100 items-center ">
-      <Sidebar />
+    <div className="w-full flex flex-col min-h-[100vh] bg-gray-50 items-center ">
+      {token && <Sidebar />}
       <div
-        className={`pl-[17vw] w-full mx-auto flex flex-col items-center justify-center mt-24 mb-12`}
+        className={`${
+          token && "pl-[22vw]"
+        } w-full mx-auto flex flex-col items-center justify-center mt-20 `}
       >
-          <Navbar title={title} />
+        <Navbar title={title} />
         <div className="w-full h-full rounded-xl bg-white p-6">{children}</div>
       </div>
+      <Bot />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import loginHeader from "@/assets/loginHeader.png";
 function LoginHeader() {
   return (
-    <div className="rounded-xl relative bg-light-blue bg-violet-100 text-white h-24 px-4 font-medium justify-between flex w-full items-center">
+    <div className="rounded-xl relative bg-primary text-white h-24 px-4 font-medium justify-between flex w-full items-center">
       <h4 className="text-lg">Добро пожаловать на поисковую систему</h4>
       <img
         src={loginHeader}

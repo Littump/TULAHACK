@@ -4,7 +4,7 @@ import API_URL from "@/config/api.ts";
 class botService {
   async getAnswer(q: string) {
     return axios.post<{ text: string }>(
-      `${API_URL}qa/question/`,
+      `${API_URL}qa/`,
       {
         text: q,
       },

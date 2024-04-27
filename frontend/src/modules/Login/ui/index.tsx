@@ -3,7 +3,7 @@ import LoginForm from "@/modules/Login/ui/LoginForm.tsx";
 
 const Login = () => {
   return (
-    <div className="flex gap-4 flex-col mt-10 w-4/12 mx-auto">
+    <div className="flex gap-4 flex-col mt-4 w-4/12 mx-auto">
       <LoginHeader />
       <LoginForm />
     </div>

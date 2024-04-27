@@ -13,7 +13,7 @@ class loginService {
     });
   }
   async getMe() {
-    return axios.get(`${API_URL}users/`, {
+    return axios.get(`${API_URL}users/me/`, {
       headers: {
         Authorization: "Token " + localStorage.getItem("token"),
       },

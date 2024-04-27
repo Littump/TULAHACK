@@ -1,14 +1,16 @@
+import { Field } from "formik";
+
 type Props = {
   className?: string;
-  setSearch: (val: string) => void;
+  name: string;
 };
 
-function Search({ setSearch, className }: Props) {
+function Search({ name, className }: Props) {
   return (
     <label className={`form-control relative`}>
-      <input
+      <Field
         type="search"
-        onChange={(e) => setSearch(e.target.value)}
+        name={name}
         className={`input input-bordered ${className} rounded-2xl py-2 text-md w-full text-md`}
         placeholder={"Поиск"}
       />

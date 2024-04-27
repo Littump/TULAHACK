@@ -1,3 +1,3 @@
-import Login from "@/modules/Login/ui";
+import Profile from "@/modules/Profile/ui";
 
-export default Login;
+export default Profile;

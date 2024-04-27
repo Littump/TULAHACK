@@ -1,3 +1,3 @@
-import Services from "./ui/index.tsx"
+import Organizations from "./ui/index.tsx";
 
-export default Services;
+export default Organizations;
