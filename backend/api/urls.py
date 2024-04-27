@@ -8,7 +8,6 @@ app_name = 'api'
 
 v1_router = DefaultRouter()
 v1_router.register('posts', views.PostViewSet, basename='posts')
-v1_router.register('likes', views.LikeUserPostViewSet, basename='likes')
 v1_router.register('comments', views.CommentViewSet, basename='comments')
 
 urlpatterns = [

@@ -14,10 +14,14 @@ class PostViewSet(ModelViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = filters.PostFilter
 
-
-class LikeUserPostViewSet(ViewSet):
-    queryset = models.LikeUserPost.objects.all()
-    serializer_class = serializers.LikeUserPostSerializer
+    @action(methods=['post'], detail=True)
+    def exchange_likes(self, request, pk):
+        post = self.get_object()
+        user = request.user
+        if models.LikeUserPost.objects.filter(user=user, post=post).exists():
+            models.LikeUserPost.objects.filter(user=user, post=post).delete()
+        else:
+            models.LikeUserPost.objects.create(user=user, post=post)
 
 
 class CommentViewSet(ModelViewSet):

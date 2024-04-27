@@ -43,6 +43,7 @@ class CommentSerializer(serializers.ModelSerializer):
 class PostSerializer(serializers.ModelSerializer):
     user = SerializerMethodField()
     likes = SerializerMethodField()
+    is_liked = SerializerMethodField()
     clients = Clients()
     comments = SerializerMethodField()
 
@@ -69,6 +70,10 @@ class PostSerializer(serializers.ModelSerializer):
     def get_comments(self, obj):
         comments = obj.comments.all()
         return CommentSerializer(comments, many=True).data
+
+    def get_is_liked(self, obj):
+        user = self.context['request'].user
+        return models.LikeUserPost.objects.filter(user=user, post=obj).exists()
 
 
 class LikeUserPostSerializer(serializers.ModelSerializer):
