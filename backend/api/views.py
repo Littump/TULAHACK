@@ -23,7 +23,7 @@ class PostViewSet(ModelViewSet):
             models.LikeUserPost.objects.filter(user=user, post=post).delete()
         else:
             models.LikeUserPost.objects.create(user=user, post=post)
-        serializer = serializers.PostSerializer(post)
+        serializer = serializers.PostSerializer(post, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
@@ -47,7 +47,7 @@ class ChatViewSet(ModelViewSet):
         chats_user = user.chats_user.all()
         chats_company = user.chats_company.all()
         chats = chats_user | chats_company
-        serializer = serializers.ChatSerializer(chats, many=True)
+        serializer = serializers.ChatSerializer(chats, many=True, context={'request': request})
         return Response(serializer.data)
 
 
