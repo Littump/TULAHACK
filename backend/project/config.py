@@ -2,7 +2,6 @@ import os
 
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 KEY_YANDEX = os.getenv("KEY_YANDEX")

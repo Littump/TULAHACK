@@ -1,14 +1,13 @@
-from drf_yasg.utils import swagger_auto_schema
-from rest_framework.decorators import action
-from rest_framework.viewsets import ModelViewSet, ViewSet
-from rest_framework.response import Response
-from rest_framework import status
-from django_filters.rest_framework import DjangoFilterBackend
-from api import serializers, models, filters
-from utils.logger import get_logger
-from djoser.views import UserViewSet
+from api import filters, models, serializers
 from clients import Clients
+from django_filters.rest_framework import DjangoFilterBackend
+from djoser.views import UserViewSet
+from drf_yasg.utils import swagger_auto_schema
 from project import config
+from rest_framework import status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet, ViewSet
 
 
 class PostViewSet(ModelViewSet):

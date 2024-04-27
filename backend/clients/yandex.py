@@ -1,7 +1,7 @@
-from utils.singltone import Singletone
-from project import config
 import requests
 from django.http import Http404
+from project import config
+from utils.singltone import Singletone
 
 
 class YandexClient(metaclass=Singletone):

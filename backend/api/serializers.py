@@ -1,8 +1,8 @@
-from rest_framework import serializers
-from djoser.serializers import UserSerializer, UserCreateSerializer
 from api import models
-from rest_framework.fields import SerializerMethodField
 from clients import Clients
+from djoser.serializers import UserCreateSerializer, UserSerializer
+from rest_framework import serializers
+from rest_framework.fields import SerializerMethodField
 
 
 class UserCustomSerializer(UserSerializer):
