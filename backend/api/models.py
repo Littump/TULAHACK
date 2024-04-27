@@ -43,5 +43,5 @@ class Comment(models.Model):
 
 
 class Chat(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chats')
-    company = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chats')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chats_user')
+    company = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chats_company')
