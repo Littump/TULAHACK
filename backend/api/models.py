@@ -27,6 +27,9 @@ class Post(models.Model):
     image = models.ImageField(upload_to='posts', blank=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
+    
+    class Meta:
+        ordering = ['-created']
 
 
 class LikeUserPost(models.Model):
@@ -41,6 +44,9 @@ class Comment(models.Model):
     text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-created']
+
 
 class Chat(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='chats_user', blank=True)
@@ -52,3 +58,6 @@ class Message(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='messages', blank=True)
     text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created']

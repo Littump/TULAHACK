@@ -26,7 +26,6 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Comment
         fields = '__all__'
-        ordering = ['created']
 
     def create(self, validated_data):
         user = self.context['request'].user
@@ -72,7 +71,7 @@ class PostSerializer(serializers.ModelSerializer):
         return CommentSerializer(comments, many=True).data
 
     def get_is_liked(self, obj):
-        user = obj.user
+        user = self.context['request'].user
         return models.LikeUserPost.objects.filter(user=user, post=obj).exists()
 
 
@@ -87,17 +86,6 @@ class LikeUserPostSerializer(serializers.ModelSerializer):
         return models.LikeUserPost.objects.create(**validated_data)
 
 
-class ChatSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Chat
-        fields = '__all__'
-
-    def create(self, validated_data):
-        user = self.context['request'].user
-        validated_data['user'] = user
-        return models.Chat.objects.create(**validated_data)
-
-
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Message
@@ -107,3 +95,49 @@ class MessageSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         validated_data['user'] = user
         return models.Message.objects.create(**validated_data)
+
+
+class ChatSerializer(serializers.ModelSerializer):
+    messages = SerializerMethodField()
+
+    me = SerializerMethodField()
+    me_image = SerializerMethodField()
+    you = SerializerMethodField()
+    you_image = SerializerMethodField()
+
+    class Meta:
+        model = models.Chat
+        fields = '__all__'
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['user'] = user
+        return models.Chat.objects.create(**validated_data)
+
+    def get_messages(self, obj):
+        messages = obj.messages.all()
+        return MessageSerializer(messages, many=True).data
+
+    def get_me(self, obj):
+        me = self.context['request'].user
+        if me.kind == 'user':
+            return (me.name or me.first_name) or me.username
+        return (obj.company.name or obj.company.first_name) or obj.company.username
+
+    def get_me_image(self, obj):
+        me = self.context['request'].user
+        if me.kind == 'user':
+            return me.photo or None
+        return obj.company.photo or None
+
+    def get_you(self, obj):
+        me = self.context['request'].user
+        if me.kind == 'user':
+            return (obj.company.name or obj.company.first_name) or obj.company.username
+        return (me.name or me.first_name) or me.username
+
+    def get_you_image(self, obj):
+        me = self.context['request'].user
+        if me.kind == 'user':
+            return obj.company.photo or None
+        return me.photo or None
