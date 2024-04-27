@@ -22,6 +22,8 @@ class PostViewSet(ModelViewSet):
             models.LikeUserPost.objects.filter(user=user, post=post).delete()
         else:
             models.LikeUserPost.objects.create(user=user, post=post)
+        serializer = serializers.PostSerializer(post)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class CommentViewSet(ModelViewSet):

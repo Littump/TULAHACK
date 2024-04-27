@@ -72,7 +72,7 @@ class PostSerializer(serializers.ModelSerializer):
         return CommentSerializer(comments, many=True).data
 
     def get_is_liked(self, obj):
-        user = self.context['request'].user
+        user = obj.user
         return models.LikeUserPost.objects.filter(user=user, post=obj).exists()
 
 
