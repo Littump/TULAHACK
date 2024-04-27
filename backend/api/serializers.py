@@ -16,6 +16,11 @@ class UserCustomSerializer(UserSerializer):
             'address',
             'description',
             'photo',
+            'time_work',
+            'site',
+            'context',
+            'ai_using',
+            'kind',
         )
 
 

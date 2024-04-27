@@ -9,6 +9,10 @@ class User(AbstractUser):
     photo = models.ImageField(upload_to='users', blank=True)
     description = models.TextField(blank=True)
     time_work = models.CharField(max_length=255, blank=True)
+    site = models.URLField(blank=True)
+
+    context = models.TextField(blank=True)
+    ai_using = models.BooleanField(default=False)
 
     KIND_CHOICES = (
         ('user', 'user'),
