@@ -11,3 +11,13 @@ from utils.logger import get_logger
 class PostViewSet(ModelViewSet):
     queryset = models.Post.objects.all()
     serializer_class = serializers.PostSerializer
+
+
+class LikeUserPostViewSet(ViewSet):
+    queryset = models.LikeUserPost.objects.all()
+    serializer_class = serializers.LikeUserPostSerializer
+
+
+class CommentViewSet(ModelViewSet):
+    queryset = models.Comment.objects.all()
+    serializer_class = serializers.CommentSerializer

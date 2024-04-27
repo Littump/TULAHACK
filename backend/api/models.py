@@ -19,3 +19,15 @@ class Post(models.Model):
     image = models.ImageField(upload_to='posts', blank=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
+
+
+class LikeUserPost(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='likes')
+    created = models.DateTimeField(auto_now_add=True)
+
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
+    text = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)

@@ -24,10 +24,4 @@ class DadataClient(metaclass=Singletone):
             raise Http404('Geocoder error')
 
         data = response.json()
-        self.logger.info(message='got response from dadata', data=data)
-        for elem in data:
-            for city in config.CITIES:
-                if city in elem['result'] and elem['qc_geo'] <= 1:
-                    return float(elem['geo_lat']), float(elem['geo_lon']), elem['result']
-
-        return None, None, None
+        return data['suggestions'][0]['value']
