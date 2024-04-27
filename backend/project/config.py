@@ -9,7 +9,6 @@ LOG_GROUP_ID = os.getenv("LOG_GROUP_ID")
 ID_YANDEX = os.getenv("ID_YANDEX")
 URL_YANDEX = os.getenv("URL_YANDEX")
 IAM_YANDEX = os.getenv("IAM_YANDEX")
-
 KEY_DADATA = os.getenv("KEY_DADATA")
 SECRET_KEY_DADATA = os.getenv("SECRET_KEY_DADATA")
 URL_DADATA = os.getenv("URL_DADATA")
