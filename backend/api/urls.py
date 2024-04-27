@@ -12,6 +12,7 @@ v1_router.register('comments', views.CommentViewSet, basename='comments')
 v1_router.register('users', views.CustomUserViewSet, basename='users')
 v1_router.register('chats', views.ChatViewSet, basename='chats')
 v1_router.register('messages', views.MessageViewSet, basename='messages')
+v1_router.register('', views.QAViewSet, basename='qa')
 
 urlpatterns = [
     path("auth/", include("djoser.urls.authtoken")),
