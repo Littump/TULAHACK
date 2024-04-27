@@ -8,6 +8,7 @@ from api import serializers, models, filters
 from utils.logger import get_logger
 from djoser.views import UserViewSet
 
+
 class PostViewSet(ModelViewSet):
     queryset = models.Post.objects.all()
     serializer_class = serializers.PostSerializer
