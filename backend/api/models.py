@@ -8,6 +8,14 @@ class User(AbstractUser):
     name = models.CharField(max_length=255, blank=True)
     photo = models.ImageField(upload_to='users', blank=True)
     description = models.TextField(blank=True)
+    time_work = models.CharField(max_length=255, blank=True)
+
+    KIND_CHOICES = (
+        ('user', 'user'),
+        ('company', 'company'),
+    )
+
+    kind = models.CharField(max_length=10, choices=KIND_CHOICES, default='user')
 
 
 class Post(models.Model):

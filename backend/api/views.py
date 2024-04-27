@@ -6,7 +6,7 @@ from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from api import serializers, models, filters
 from utils.logger import get_logger
-
+from djoser.views import UserViewSet
 
 class PostViewSet(ModelViewSet):
     queryset = models.Post.objects.all()
@@ -29,3 +29,8 @@ class PostViewSet(ModelViewSet):
 class CommentViewSet(ModelViewSet):
     queryset = models.Comment.objects.all()
     serializer_class = serializers.CommentSerializer
+
+
+class CustomUserViewSet(UserViewSet):
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = filters.UserFilter
