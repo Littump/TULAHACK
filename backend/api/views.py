@@ -41,6 +41,15 @@ class ChatViewSet(ModelViewSet):
     queryset = models.Chat.objects.all()
     serializer_class = serializers.ChatSerializer
 
+    @action(methods=['get'], detail=False)
+    def me(self, request):
+        user = request.user
+        chats_user = user.chats_user.all()
+        chats_company = user.chats_company.all()
+        chats = chats_user | chats_company
+        serializer = serializers.ChatSerializer(chats, many=True)
+        return Response(serializer.data)
+
 
 class MessageViewSet(ModelViewSet):
     queryset = models.Message.objects.all()
