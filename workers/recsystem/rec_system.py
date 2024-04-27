@@ -5,7 +5,8 @@ class RecSystemWorker(Worker):
         super(RecSystemWorker, self).__init__()
         ...
 
-    def get_...(self, ...) -> float:
+    def get_something(self, something) -> float:
+        ...
 
     def _process(self):
         ...
