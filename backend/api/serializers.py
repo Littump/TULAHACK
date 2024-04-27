@@ -34,10 +34,10 @@ class CommentSerializer(serializers.ModelSerializer):
         return models.Comment.objects.create(**validated_data)
 
     def get_user(self, obj):
-        return obj.user.name
+        return (obj.user.name or obj.user.first_name) or ''
 
     def get_user_image(self, obj):
-        return obj.user.photo
+        return obj.user.photo or None
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -62,7 +62,7 @@ class PostSerializer(serializers.ModelSerializer):
         return data
 
     def get_user(self, obj):
-        return obj.user.name
+        return (obj.user.name or obj.user.first_name) or ''
 
     def get_likes(self, obj):
         return obj.likes.count()
