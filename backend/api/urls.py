@@ -10,6 +10,7 @@ v1_router = DefaultRouter()
 v1_router.register('posts', views.PostViewSet, basename='posts')
 v1_router.register('comments', views.CommentViewSet, basename='comments')
 v1_router.register('users', views.CustomUserViewSet, basename='users')
+v1_router.register('chats', views.ChatViewSet, basename='chats')
 
 urlpatterns = [
     path("auth/", include("djoser.urls.authtoken")),

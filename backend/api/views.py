@@ -34,3 +34,8 @@ class CommentViewSet(ModelViewSet):
 class CustomUserViewSet(UserViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = filters.UserFilter
+
+
+class ChatViewSet(ViewSet):
+    queryset = models.Chat.objects.all()
+    serializer_class = serializers.ChatSerializer

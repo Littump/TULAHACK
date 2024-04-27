@@ -85,3 +85,14 @@ class LikeUserPostSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         validated_data['user'] = user
         return models.LikeUserPost.objects.create(**validated_data)
+
+
+class ChatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Chat
+        fields = '__all__'
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['user'] = user
+        return models.Chat.objects.create(**validated_data)
