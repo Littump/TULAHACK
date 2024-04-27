@@ -36,6 +36,12 @@ class CustomUserViewSet(UserViewSet):
     filter_backends = (DjangoFilterBackend,)
     filterset_class = filters.UserFilter
 
+    def get_queryset(self):
+        if self.action == "list":
+            return models.User.objects.all()
+        queryset = super().get_queryset()
+        return queryset
+
 
 class ChatViewSet(ModelViewSet):
     queryset = models.Chat.objects.all()

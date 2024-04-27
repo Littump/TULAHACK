@@ -164,8 +164,6 @@ SWAGGER_SETTINGS = {
     }
 }
 
-AUTH_USER_MODEL = 'api.User'
-
 DJOSER = {
     'SERIALIZERS': {
         'user': 'api.serializers.UserCustomSerializer',

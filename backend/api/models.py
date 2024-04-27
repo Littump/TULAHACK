@@ -31,7 +31,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='posts', blank=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
-    
+
     class Meta:
         ordering = ['-created']
 
