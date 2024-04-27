@@ -6,6 +6,7 @@ from rest_framework import status
 from django_filters.rest_framework import DjangoFilterBackend
 from api import serializers, models, filters
 from utils.logger import get_logger
+from djoser.views import UserViewSet
 
 
 class PostViewSet(ModelViewSet):
@@ -22,8 +23,20 @@ class PostViewSet(ModelViewSet):
             models.LikeUserPost.objects.filter(user=user, post=post).delete()
         else:
             models.LikeUserPost.objects.create(user=user, post=post)
+        serializer = serializers.PostSerializer(post)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class CommentViewSet(ModelViewSet):
     queryset = models.Comment.objects.all()
     serializer_class = serializers.CommentSerializer
+
+
+class CustomUserViewSet(UserViewSet):
+    filter_backends = (DjangoFilterBackend,)
+    filterset_class = filters.UserFilter
+
+
+class ChatViewSet(ViewSet):
+    queryset = models.Chat.objects.all()
+    serializer_class = serializers.ChatSerializer

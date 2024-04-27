@@ -24,4 +24,7 @@ class DadataClient(metaclass=Singletone):
             raise Http404('Geocoder error')
 
         data = response.json()
-        return data['suggestions'][0]['value']
+        if data['suggestions']:
+            return data['suggestions'][0]['value']
+
+        return ''

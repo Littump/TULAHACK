@@ -34,10 +34,10 @@ class CommentSerializer(serializers.ModelSerializer):
         return models.Comment.objects.create(**validated_data)
 
     def get_user(self, obj):
-        return obj.user.name
+        return (obj.user.name or obj.user.first_name) or obj.user.username
 
     def get_user_image(self, obj):
-        return obj.user.photo
+        return obj.user.photo or None
 
 
 class PostSerializer(serializers.ModelSerializer):
@@ -62,7 +62,7 @@ class PostSerializer(serializers.ModelSerializer):
         return data
 
     def get_user(self, obj):
-        return obj.user.name
+        return (obj.user.name or obj.user.first_name) or obj.user.username
 
     def get_likes(self, obj):
         return obj.likes.count()
@@ -72,7 +72,7 @@ class PostSerializer(serializers.ModelSerializer):
         return CommentSerializer(comments, many=True).data
 
     def get_is_liked(self, obj):
-        user = self.context['request'].user
+        user = obj.user
         return models.LikeUserPost.objects.filter(user=user, post=obj).exists()
 
 
@@ -85,3 +85,14 @@ class LikeUserPostSerializer(serializers.ModelSerializer):
         user = self.context['request'].user
         validated_data['user'] = user
         return models.LikeUserPost.objects.create(**validated_data)
+
+
+class ChatSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Chat
+        fields = '__all__'
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        validated_data['user'] = user
+        return models.Chat.objects.create(**validated_data)
