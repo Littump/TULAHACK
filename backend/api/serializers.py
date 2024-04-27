@@ -28,7 +28,7 @@ class PostSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context['request'].user
         validated_data['user'] = user
-        
+
         return models.Post.objects.create(**validated_data)
 
     def validate(self, data):
@@ -37,5 +37,3 @@ class PostSerializer(serializers.ModelSerializer):
 
     def get_user(self, obj):
         return obj.user.name
-
-    
