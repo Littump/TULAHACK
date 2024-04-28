@@ -37,7 +37,13 @@ const Chat = () => {
     }
   }, [data]);
 
-  if (!data || !myData || isPending) return <div className="loading"></div>;
+  if (!data || !myData || isPending)
+    return (
+      <div className="flex flex-col w-full bg-violet-50 rounded-3xl overflow-hidden ">
+        <div className="bg-primary w-full h-20 flex justify-center items-center text-white"></div>
+        <div className="flex gap-4 flex-col px-4 my-4 overflow-y-scroll h-[60vh]"></div>
+      </div>
+    );
   const handleSubmit = (text: string) => {
     mutate(text);
   };

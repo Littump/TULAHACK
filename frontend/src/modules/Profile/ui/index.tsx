@@ -6,14 +6,11 @@ import UpdateMeDto from "@/modules/Profile/types/updateMe.dto.ts";
 import { useUpdateMe } from "@/modules/Profile/api/useUpdateProfile.ts";
 import { useEffect, useState } from "react";
 import AlertComponent from "@/ui/AlertComponent.tsx";
-import PhoneInput from "@/ui/PhoneInput.tsx";
 import TextInput from "@/ui/TextInput.tsx";
 import CheckboxComponent from "@/ui/CheckboxComponent.tsx";
 import TextAreaInput from "@/ui/TextAreaInput.tsx";
-import convertPhoneToReq from "@/helpers/convertPhoneToReq.ts";
 
 const validationsSchema = yup.object().shape({
-  username: yup.string().required("Введите телефон").min(4, "Слишком короткий"),
   name: yup
     .string()
     .required("Введите имя/ название компании")
@@ -33,13 +30,11 @@ const Profile = () => {
     }
   }, [data, isPending, isError]);
   if (!data || isPending) return <div className="loading"></div>;
-  const { name, kind, username, description, context, address, ai_using } =
-    data?.data;
+  const { name, kind, description, context, address, ai_using } = data?.data;
   const initialValues: UpdateMeDto = {
     address,
     description,
     name,
-    username: username.slice(1),
     ai_using,
     context,
   };
@@ -47,21 +42,13 @@ const Profile = () => {
     <Formik
       validationSchema={validationsSchema}
       initialValues={initialValues}
-      onSubmit={(values) =>
-        mutate({ ...values, username: convertPhoneToReq(values.username) })
-      }
+      onSubmit={(values) => mutate(values)}
     >
-      {({ errors, touched, handleChange }) => (
+      {({ errors, touched }) => (
         <>
           <Form className="flex gap-16 h-[78vh]">
             <div className="flex-col flex gap-9 w-6/12">
               <h2 className="text-2xl font-bold">Информация о вас</h2>
-              <PhoneInput
-                name="username"
-                isError={!!(errors.username && touched.username)}
-                error={errors.username}
-                onChange={handleChange}
-              />
               <TextInput
                 name="name"
                 isError={!!(errors.name && touched.name)}
@@ -114,13 +101,6 @@ const Profile = () => {
                       rows={4}
                     ></TextAreaInput>
                   </span>
-                  <button type="submit" className={`my-btn mt-5`}>
-                    {updateMePending ? (
-                      <span className="loading"></span>
-                    ) : (
-                      "Улучшить"
-                    )}
-                  </button>
                 </div>
               </div>
             )}
