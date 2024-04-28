@@ -83,7 +83,7 @@ const NewsItemBody = ({
                   <a
                     className="my-btn my-4"
                     target="_blank"
-                    href={`https://yandex.ru/maps/?pt=${latitude},${longitude}&z=12&l=map`}
+                    href={`https://yandex.ru/maps/?pt=${longitude},${latitude}&z=12&l=map`}
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
