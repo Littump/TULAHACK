@@ -1,3 +1,6 @@
+**Ссылка на видео - демонстрацию сервиса:**
+https://drive.google.com/file/d/1ah0Ufjh0PtkWJG4uB2EDJQGxmpUJfmuA/view?usp=sharing
+
 ## Правила разработки
 Техническая документация, или правила разработки
 
