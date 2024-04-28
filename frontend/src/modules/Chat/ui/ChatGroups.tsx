@@ -37,7 +37,7 @@ const ChatGroups = () => {
   if (!data || isPending) return <div className="loading"></div>;
   return (
     <div className="flex gap-8 h-[78vh]">
-      <div className="w-6/12 flex flex-col gap-4">
+      <div className="w-6/12 flex flex-col gap-4 h-[78vh] overflow-y-scroll no-scroll">
         {data.data.map((el) => (
           <ChatGroup
             key={el.id + "group"}

@@ -1,6 +1,7 @@
 import axios from "axios";
 import API_URL from "@/config/api.ts";
 import LoginDto from "@/modules/Login/types/login.dto.ts";
+import { IOrganization } from "@/modules/Organizations/types/OrganizationTypes.ts";
 
 class loginService {
   async login(body: LoginDto) {
@@ -13,7 +14,7 @@ class loginService {
     });
   }
   async getMe() {
-    return axios.get(`${API_URL}users/me/`, {
+    return axios.get<IOrganization>(`${API_URL}users/me/`, {
       headers: {
         Authorization: "Token " + localStorage.getItem("token"),
       },

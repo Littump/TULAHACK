@@ -27,6 +27,6 @@ export const useGetInfiniteNews = () =>
     initialPageParam: 0,
     queryFn: ({ pageParam }) => getInfiniteScroll(pageParam),
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage.length ? allPages.length + 1 : undefined;
+      return lastPage?.length ? allPages?.length + 1 : undefined;
     },
   });
