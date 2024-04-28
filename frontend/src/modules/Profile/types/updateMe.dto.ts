@@ -1,5 +1,4 @@
 export default interface UpdateMeDto {
-  username: string;
   name: string;
   address: string;
   description: string;

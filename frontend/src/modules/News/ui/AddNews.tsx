@@ -115,7 +115,7 @@ const AddNews = () => {
 
                 <TextInput
                   label="Заголовок новости"
-                  placeholder="Спецкурс по программированию"
+                  placeholder="Заголовок"
                   name="title"
                   isError={!!(errors.title && touched.title)}
                 />

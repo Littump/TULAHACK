@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useGetChats } from "@/modules/Chat/api/useGetChats.ts";
 import { IMessage } from "@/modules/Chat/types/types.ts";
-import user from "@/assets/user.png";
+import user from "@/assets/company_1.png";
 interface ChatGroupProps {
   lastMessage: IMessage | null;
   name: string;
@@ -37,7 +37,7 @@ const ChatGroups = () => {
   if (!data || isPending) return <div className="loading"></div>;
   return (
     <div className="flex gap-8 h-[78vh]">
-      <div className="w-6/12 flex flex-col gap-4">
+      <div className="w-6/12 flex flex-col gap-4 h-[78vh] overflow-y-scroll no-scroll">
         {data.data.map((el) => (
           <ChatGroup
             key={el.id + "group"}
