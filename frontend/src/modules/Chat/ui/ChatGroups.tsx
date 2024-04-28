@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { useGetChats } from "@/modules/Chat/api/useGetChats.ts";
 import { IMessage } from "@/modules/Chat/types/types.ts";
-import user from "@/assets/user.png";
+import user from "@/assets/company_1.png";
 interface ChatGroupProps {
   lastMessage: IMessage | null;
   name: string;

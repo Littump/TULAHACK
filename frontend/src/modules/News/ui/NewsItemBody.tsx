@@ -1,6 +1,7 @@
 import { INewsItem } from "@/modules/News/types/newsItem.ts";
 
 import img from "@/assets/blank_post.webp";
+import user from "@/assets/comment_ava.jpg";
 import { useAddComment } from "@/modules/News/api/useAddComment.ts";
 import { Form, Formik } from "formik";
 import TextInput from "@/ui/TextInput.tsx";
@@ -16,7 +17,7 @@ const Comment = ({ name, text }: CommentProps) => {
     <li className="flex gap-4 items-center bg-gray-50 py-2 px-4 rounded-xl">
       <div className="avatar placeholder">
         <div className="bg-primary text-white rounded-full w-12">
-          <span>{name[0]}</span>
+          <img src={user} alt="" />
         </div>
       </div>
       <div className="flex flex-col gap-2">
@@ -60,7 +61,7 @@ const NewsItemBody = ({
               <img
                 src={image ? image : img}
                 alt=""
-                className="rounded-xl h-full w-full"
+                className="rounded-xl h-64 w-full"
               />
             </div>
             <div className="w-7/12 flex flex-col gap-6">
