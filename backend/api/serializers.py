@@ -1,8 +1,8 @@
-from rest_framework import serializers
-from djoser.serializers import UserSerializer
 from api import models
-from rest_framework.fields import SerializerMethodField
 from clients import Clients
+from djoser.serializers import UserCreateSerializer, UserSerializer
+from rest_framework import serializers
+from rest_framework.fields import SerializerMethodField
 
 
 class UserCustomSerializer(UserSerializer):
@@ -21,6 +21,26 @@ class UserCustomSerializer(UserSerializer):
             'context',
             'ai_using',
             'kind',
+        )
+
+
+class UserСreateCustomSerializer(UserCreateSerializer):
+    class Meta:
+        model = models.User
+        fields = (
+            'username',
+            'name',
+            'phone',
+            'address',
+            'description',
+            'photo',
+            'time_work',
+            'site',
+            'context',
+            'ai_using',
+            'kind',
+            'password',
+            'email',
         )
 
 
@@ -92,6 +112,8 @@ class LikeUserPostSerializer(serializers.ModelSerializer):
 
 
 class MessageSerializer(serializers.ModelSerializer):
+    clients = Clients()
+
     class Meta:
         model = models.Message
         fields = '__all__'
@@ -99,7 +121,13 @@ class MessageSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self.context['request'].user
         validated_data['user'] = user
-        return models.Message.objects.create(**validated_data)
+        message = models.Message.objects.create(**validated_data)
+
+        if user.kind == 'user' and message.chat.company.ai_using and message.chat.company.context:
+            answer = self.clients.yandex.gpt(message.chat.company.context, message.text)
+            models.Message.objects.create(chat=message.chat, user=message.chat.company, text=answer)
+
+        return message
 
 
 class ChatSerializer(serializers.ModelSerializer):
@@ -146,3 +174,7 @@ class ChatSerializer(serializers.ModelSerializer):
         if me.kind == 'user':
             return obj.company.photo or None
         return me.photo or None
+
+
+class QAQustionSerializer(serializers.Serializer):
+    text = serializers.CharField(max_length=2047)

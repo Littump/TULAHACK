@@ -1,7 +1,7 @@
-from project import config
 import requests
-from utils.singltone import Singletone
 from django.http import Http404
+from project import config
+from utils.singltone import Singletone
 
 
 class DadataClient(metaclass=Singletone):

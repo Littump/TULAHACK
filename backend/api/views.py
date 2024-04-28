@@ -1,12 +1,13 @@
-from drf_yasg.utils import swagger_auto_schema
-from rest_framework.decorators import action
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.response import Response
-from rest_framework import status
+from api import filters, models, serializers
+from clients import Clients
 from django_filters.rest_framework import DjangoFilterBackend
-from api import serializers, models, filters
-from utils.logger import get_logger
 from djoser.views import UserViewSet
+from drf_yasg.utils import swagger_auto_schema
+from project import config
+from rest_framework import status
+from rest_framework.decorators import action
+from rest_framework.response import Response
+from rest_framework.viewsets import ModelViewSet, ViewSet
 
 
 class PostViewSet(ModelViewSet):
@@ -60,3 +61,22 @@ class ChatViewSet(ModelViewSet):
 class MessageViewSet(ModelViewSet):
     queryset = models.Message.objects.all()
     serializer_class = serializers.MessageSerializer
+
+
+class QAViewSet(ViewSet):
+    clients = Clients()
+
+    @swagger_auto_schema(
+        request_body=serializers.QAQustionSerializer,
+        responses={200: serializers.QAQustionSerializer}
+    )
+    @action(methods=['post'], detail=False)
+    def qa(self, request):
+        serializer = serializers.QAQustionSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        text = serializer.validated_data['text']
+        prompt = config.PROMPT
+        answer = self.clients.yandex.gpt(prompt, text)
+        serializer = serializers.QAQustionSerializer(data={'text': answer})
+        serializer.is_valid(raise_exception=True)
+        return Response(serializer.data, status=200)
